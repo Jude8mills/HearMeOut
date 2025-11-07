@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> May I ask? </title>
+  <title> I'm asking </title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
@@ -38,14 +38,20 @@
   </style>
 </head>
 <body>
-
-  <!-- Page 1 -->
-  <div id="page1" class="page visible">
-    <div class="heart">Cat</div>
-    <h1>Hey Sweetie!</h1>
-    <p>I made this site because it felt like the most <em>'Jude'</em> way to go about it.</p>
-    <button onclick="nextPage(0)">Turn the page →</button>
-  </div>
+<!-- Page 1 -->
+<div id="page1" class="page visible" style="
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+">
+  <div class="Cat">😺</div>
+   <h1>Hi Sweetie!</h1>
+  <p style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 15px;">
+   I made this site because it felt like the most <em>'Jude'</em> way to go about it
+  </p>
+  <button onclick="nextPage(0)">Turn the page →</button>
+</div>
 
   <!-- Page 2 -->
   <div id="page2" class="page hidden">
