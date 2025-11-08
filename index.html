@@ -44,21 +44,59 @@
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
 ">
-<h1 style="
-  font-family: 'Pacifico', cursive;
-  font-size: 3.2rem;
-  color: #ff69b4;
- -webkit-text-stroke: 0.5px white;
-text-stroke: 0.5px white;
-  text-shadow: none;
-">Hi Sweetie!</h1>
-  <p style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 15px;">
-   I made this site because it felt like the most <em>'Jude'</em> way to go about it
-  </p>
-  <button onclick="nextPage(0)">Turn the page →</button>
-</div>
 
+  <!-- KEN'S SPEECH BUBBLE -->
+  <div style="
+    position: absolute;
+    top: 38%;           /* Tweak: move up/down to match Ken's mouth */
+    left: 58%;          /* Tweak: move left/right */
+    transform: translateX(-50%);
+    width: 240px;
+    padding: 18px 24px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(255,107,157,0.3);
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    color: #ff69b4;
+    -webkit-text-stroke: 0.8px white;
+    text-stroke: 0.8px white;
+    text-align: center;
+    z-index: 2;
+  ">
+    Hi Sweetie!
+    
+    <!-- Little tail pointing to Ken -->
+    <div style="
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 16px solid white;
+    "></div>
+  </div>
+
+  <!-- PARAGRAPH -->
+  <p style="
+    background: rgba(255,255,255,0.8);
+    padding: 1rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  ">
+    I made this site because it felt like the most <em>'Jude'</em> way to go about it
+  </p>
+
+  <!-- BUTTON -->
+  <button onclick="nextPage(0)">Turn the page</button>
+</div>
   <!-- Page 2 -->
   <div id="page2" class="page hidden">
     <img src="FirstGIF.gif" alt="Cute cat" style="width: 150px; height: 150px; display: block; margin: 1rem auto;">
