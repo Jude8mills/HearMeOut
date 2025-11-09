@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I'm asking</title>
   <style>
-    /* FONTS FIRST */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap');
 
-    /* SPARKLE ANIMATION */
     @keyframes sparklePop {
       0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
       100% { transform: translate(-50%, -50%) scale(1.5) translateY(-30px); opacity: 0; }
     }
 
-    /* FLOAT ANIMATION */
     @keyframes float {
       0%, 100% { transform: translateY(0) translateX(0); }
       25% { transform: translateY(-15px) translateX(10px); }
@@ -22,11 +19,9 @@
       75% { transform: translateY(-20px) translateX(5px); }
     }
 
-    /* RESET */
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
     body { background:#ffeef8; height:100vh; overflow:hidden; }
 
-    /* PAGE */
     .page {
       position:absolute; inset:0; z-index:1;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -37,11 +32,9 @@
     .page.visible { transform:translateX(0); }
     .page.hidden { display:none; }
 
-    /* TYPO */
     h1 { font-size:2.5rem; color:#ff6b9d; margin-bottom:1rem; }
     p { font-size:1.2rem; color:#444; max-width:600px; line-height:1.6; }
 
-    /* BUTTON */
     button {
       margin-top:2rem; padding:1rem 2rem; font-size:1.1rem;
       background:#ff6b9d; color:white; border:none; border-radius:50px;
@@ -49,18 +42,15 @@
     }
     button:hover { transform:scale(1.05); }
 
-    /* HEART */
     .heart { font-size:3rem; animation:pulse 1.5s infinite; margin:1rem 0; }
     @keyframes pulse { 0%,100% {transform:scale(1);} 50% {transform:scale(1.2);} }
 
-    /* QUIZ */
     .quiz { margin:2rem 0; }
     .quiz button { margin:0.5rem; background:#c3b1e1; }
     .quiz button.correct { background:#a0e7a0; }
     #finalYes { background:#a0e7a0; }
     #finalNo { background:#ff9999; }
 
-    /* CONFETTI */
     .confetti { position:absolute; width:10px; height:10px; background:#ff6b9d; animation:fall 3s linear infinite; }
     @keyframes fall { to { transform:translateY(100vh) rotate(360deg); opacity:0; } }
   </style>
@@ -85,11 +75,11 @@
   align-items: center;
 ">
 
-  <!-- SPARKLING BUBBLE -->
+  <!-- BUBBLE: BACK TO ORIGINAL SPOT -->
   <div id="sparkleBubble" style="
     position: absolute;
     top: 15%;
-    left: 22%;
+    left: 68%;  /* ← FIXED: was 22%, now back to right side */
     width: 200px;
     padding: 14px 18px;
     background: white;
@@ -104,7 +94,6 @@
     z-index: 2;
     animation: float 6s ease-in-out infinite;
     cursor: pointer;
-    position: relative;
     overflow: visible;
   ">
     Hi Sweetie!
@@ -125,7 +114,7 @@
   <button onclick="nextPage(0)">Turn the page</button>
 </div>
 
-<!-- [REST OF PAGES UNCHANGED] -->
+<!-- [PAGES 2–6 SAME AS BEFORE — NO CHANGES] -->
 <!-- Page 2 -->
 <div id="page2" class="page hidden">
   <img src="FirstGIF.gif" alt="Cute cat" style="width: 150px; height: 150px; display: block; margin: 1rem auto;">
@@ -223,27 +212,31 @@
     }
   }
 
-  // SPARKLES ON HOVER
-  const bubble = document.getElementById('sparkleBubble');
-  bubble.addEventListener('mouseenter', () => {
-    for (let i = 0; i < 6; i++) {
-      const s = document.createElement('div');
-      s.textContent = 'Sparkles';
-      s.style.position = 'absolute';
-      s.style.fontSize = '1.2rem';
-      s.style.pointerEvents = 'none';
-      s.style.zIndex = '3';
-      s.style.animation = 'sparklePop 0.8s ease-out forwards';
-      const angle = i * 60 + Math.random() * 30;
-      const dist = 30 + Math.random() * 20;
-      const x = Math.cos(angle * Math.PI / 180) * dist;
-      const y = Math.sin(angle * Math.PI / 180) * dist;
-      s.style.left = `calc(50% + ${x}px)`;
-      s.style.top = `calc(50% + ${y}px)`;
-      s.style.transform = 'translate(-50%, -50%)';
-      bubble.appendChild(s);
-      setTimeout(() => s.remove(), 800);
-    }
+  // SPARKLES ON HOVER — FIXED
+  document.addEventListener('DOMContentLoaded', () => {
+    const bubble = document.getElementById('sparkleBubble');
+    if (!bubble) return;
+
+    bubble.addEventListener('mouseenter', () => {
+      for (let i = 0; i < 6; i++) {
+        const s = document.createElement('div');
+        s.textContent = '';  // ← SPARKLE EMOJI
+        s.style.position = 'absolute';
+        s.style.fontSize = '1.3rem';
+        s.style.pointerEvents = 'none';
+        s.style.zIndex = '3';
+        s.style.animation = 'sparklePop 0.8s ease-out forwards';
+        const angle = i * 60 + Math.random() * 30;
+        const dist = 30 + Math.random() * 20;
+        const x = Math.cos(angle * Math.PI / 180) * dist;
+        const y = Math.sin(angle * Math.PI / 180) * dist;
+        s.style.left = `calc(50% + ${x}px)`;
+        s.style.top = `calc(50% + ${y}px)`;
+        s.style.transform = 'translate(-50%, -50%)';
+        bubble.appendChild(s);
+        setTimeout(() => s.remove(), 800);
+      }
+    });
   });
 </script>
 
