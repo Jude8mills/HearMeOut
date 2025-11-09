@@ -88,7 +88,7 @@
   align-items: center;
 ">
 
-  <!-- FLOATING + SPARKLING BUBBLE -->
+  <!-- BUBBLE — FIXED -->
   <div style="
     position: absolute;
     top: 25%;
@@ -107,7 +107,6 @@
     z-index: 2;
     animation: float 6s ease-in-out infinite;
     cursor: pointer;
-    position: relative;
     overflow: visible;
   "
   onmouseover="sparkle(this)"
@@ -116,18 +115,10 @@
   </div>
 
   <!-- PARAGRAPH -->
-  <p style="
-    background: rgba(255,255,255,0.8);
-    padding: 1rem;
-    border-radius: 15px;
-    max-width: 600px;
-    margin: 6rem auto 1rem;
-    text-align: center;
-  ">
+  <p style="background: rgba(255,255,255,0.8); padding: 1rem; border-radius: 15px; max-width: 600px; margin: 6rem auto 1rem; text-align: center;">
     I made this site because it felt like the most <em>'Jude'</em> way to go about it
   </p>
 
-  <!-- BUTTON -->
   <button onclick="nextPage(0)">Turn the page</button>
 </div>
 
