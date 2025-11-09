@@ -62,27 +62,33 @@
   align-items: center;
 ">
 
-  <!-- FLOATING SPEECH BUBBLE -->
-  <div style="
-    position: absolute;
-    top: 15%;
-    left: 22%;
-    width: 200px;
-    padding: 14px 18px;
-    background: white;
-    border-radius: 35px;
-    box-shadow: 0 4px 12px rgba(255,107,157,0.25);
-    font-family: 'Pacifico', cursive;
-    font-size: 1.4rem;
-    color: #ff69b4;
-    -webkit-text-stroke: 0.6px white;
-    text-stroke: 0.6px white;
-    text-align: center;
-    z-index: 2;
-    animation: float 6s ease-in-out infinite;
-  ">
-    Hi Sweetie!
-  </div>
+ <!-- FLOATING + SPARKLING BUBBLE -->
+<div style="
+  position: absolute;
+  top: 25%;
+  left: 68%;
+  width: 200px;
+  padding: 14px 18px;
+  background: white;
+  border-radius: 35px;
+  box-shadow: 0 4px 12px rgba(255,107,157,0.25);
+  font-family: 'Pacifico', cursive;
+  font-size: 1.4rem;
+  color: #ff69b4;
+  -webkit-text-stroke: 0.6px white;
+  text-stroke: 0.6px white;
+  text-align: center;
+  z-index: 2;
+  animation: float 6s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  overflow: visible;
+" 
+onmouseover="sparkle(this)" 
+onmouseout="clearSparkles(this)">
+  Hi Sweetie!
+</div>
 
   <!-- PARAGRAPH -->
  <p style="
@@ -90,7 +96,7 @@
   padding: 1rem;
   border-radius: 15px;
   max-width: 600px;
-  margin: 4rem auto 1rem;   /* NEW: pushes it down */
+  margin: 6rem auto 1rem;   /* NEW: pushes it down */
   text-align: center;
 ">
   I made this site because it felt like the most <em>'Jude'</em> way to go about it
@@ -185,7 +191,7 @@
     setTimeout(() => pages[3].classList.add('visible'), 50);
   }
 
-  function createConfetti() {
+   function createConfetti() {
     const container = document.getElementById('confettiContainer');
     for(let i=0;i<120;i++){
       const c = document.createElement('div');
@@ -196,7 +202,43 @@
       container.appendChild(c);
     }
   }
-</script>
 
+  // SPARKLE CODE — ADD THIS HERE
+  function sparkle(element) {
+    clearSparkles(element);
+    for (let i = 0; i < 6; i++) {
+      const s = document.createElement('div');
+      s.textContent = 'Sparkles';
+      s.style.position = 'absolute';
+      s.style.fontSize = '1.2rem';
+      s.style.pointerEvents = 'none';
+      s.style.zIndex = '3';
+      s.style.animation = 'sparklePop 0.8s ease-out forwards';
+      const angle = (i * 60) + (Math.random() * 30);
+      const distance = 30 + Math.random() * 20;
+      const x = Math.cos(angle * Math.PI / 180) * distance;
+      const y = Math.sin(angle * Math.PI / 180) * distance;
+      s.style.left = `calc(50% + ${x}px)`;
+      s.style.top = `calc(50% + ${y}px)`;
+      s.style.transform = 'translate(-50%, -50%)';
+      element.appendChild(s);
+      setTimeout(() => s.remove(), 800);
+    }
+  }
+
+  function clearSparkles(element) {
+    element.querySelectorAll('div').forEach(s => s.remove());
+  }
+
+  // Add sparkle animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes sparklePop {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1.5) translateY(-30px); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 </body>
 </html>
