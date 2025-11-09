@@ -6,7 +6,51 @@
   <title>I'm asking</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap');
+/* FLOATING BUBBLE */
+.sparkle-bubble {
+  position: absolute;
+  top: 15%;
+  left: 58%;
+  width: 200px;
+  padding: 14px 18px;
+  background: white;
+  border-radius: 35px;
+  box-shadow: 0 4px 12px rgba(255,107,157,0.25);
+  font-family: 'Pacifico', cursive;
+  font-size: 1.4rem;
+  color: #ff69b4;
+  -webkit-text-stroke: 0.6px white;
+  text-stroke: 0.6px white;
+  text-align: center;
+  z-index: 2;
+  animation: float 6s ease-in-out infinite;
+  cursor: default;
+  overflow: visible;
+  user-select: none;
+}
 
+/* SPARKLES (CSS ONLY) */
+.sparkle {
+  position: absolute;
+  font-size: 1.3rem;
+  pointer-events: none;
+  opacity: 0;
+  animation: sparklePop 1.5s ease-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+.sparkle:nth-child(1) { --i: 0; top: 10%; left: 20%; }
+.sparkle:nth-child(2) { --i: 1; top: 20%; left: 80%; }
+.sparkle:nth-child(3) { --i: 2; top: 70%; left: 10%; }
+.sparkle:nth-child(4) { --i: 3; top: 80%; left: 70%; }
+.sparkle:nth-child(5) { --i: 4; top: 40%; left: 90%; }
+.sparkle:nth-child(6) { --i: 5; top: 60%; left: 5%; }
+
+@keyframes sparklePop {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5) translateY(-40px); opacity: 0; }
+}
     @keyframes sparklePop {
       0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
       100% { transform: translate(-50%, -50%) scale(1.5) translateY(-30px); opacity: 0; }
@@ -73,31 +117,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: visible;  /* CRITICAL: allows sparkles to show */
+  overflow: visible;
 ">
 
-  <!-- BUBBLE: PERFECT POSITION -->
-  <div id="sparkleBubble" style="
-    position: absolute;
-    top: 15%;
-    left: 58%;  /* ← PERFECT: near Ken's mouth */
-    width: 200px;
-    padding: 14px 18px;
-    background: white;
-    border-radius: 35px;
-    box-shadow: 0 4px 12px rgba(255,107,157,0.25);
-    font-family: 'Pacifico', cursive;
-    font-size: 1.4rem;
-    color: #ff69b4;
-    -webkit-text-stroke: 0.6px white;
-    text-stroke: 0.6px white;
-    text-align: center;
-    z-index: 2;
-    animation: float 6s ease-in-out infinite;
-    cursor: pointer;
-    overflow: visible;
-  ">
+  <!-- BUBBLE WITH CSS SPARKLES -->
+  <div class="sparkle-bubble">
     Hi Sweetie!
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
   </div>
 
   <!-- PARAGRAPH -->
@@ -114,7 +145,6 @@
 
   <button onclick="nextPage(0)">Turn the page</button>
 </div>
-
 <!-- [PAGES 2–6 UNCHANGED] -->
 <div id="page2" class="page hidden">
   <img src="FirstGIF.gif" alt="Cute cat" style="width: 150px; height: 150px; display: block; margin: 1rem auto;">
