@@ -252,6 +252,7 @@ button:hover { transform:scale(1.05); }
 </div>
 <script>
   const pages = document.querySelectorAll('.page');
+
   function nextPage(n) {
     pages[n].classList.remove('visible');
     pages[n].classList.add('hidden');
@@ -259,18 +260,22 @@ button:hover { transform:scale(1.05); }
     next.classList.remove('hidden');
     setTimeout(() => next.classList.add('visible'), 50);
   }
+
   function correct() {
     document.getElementById('quizResult').innerHTML = 'Exactly! <br>You know me too well.';
     document.getElementById('quizNext').style.display = 'block';
     setTimeout(() => nextPage(2), 2000);
   }
+
   function wrong() {
     document.getElementById('quizResult').textContent = 'Nice try, but nope!';
   }
+
   function sayYes() {
     nextPage(3);
     setTimeout(createConfetti, 600);
   }
+
   function sayNo() {
     nextPage(3);
     setTimeout(() => {
@@ -278,15 +283,17 @@ button:hover { transform:scale(1.05); }
       setTimeout(() => pages[5].classList.add('visible'), 50);
     }, 50);
   }
+
   function backToQuestion() {
     pages[5].classList.remove('visible');
     pages[5].classList.add('hidden');
     pages[3].classList.remove('hidden');
     setTimeout(() => pages[3].classList.add('visible'), 50);
   }
+
   function createConfetti() {
     const container = document.getElementById('confettiContainer');
-    for(let i=0;i<120;i++){
+    for(let i=0; i<120; i++){
       const c = document.createElement('div');
       c.className='confetti';
       c.style.left = Math.random()*100 + 'vw';
@@ -295,52 +302,51 @@ button:hover { transform:scale(1.05); }
       container.appendChild(c);
     }
   }
-  <script>
-// DRAG FUNCTIONALITY
-document.querySelectorAll('.sticky-note').forEach(note => {
-  let isDragging = false;
-  let startX, startY, initialLeft, initialTop;
 
-  const startDrag = (e) => {
-    isDragging = true;
-    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-    startX = clientX;
-    startY = clientY;
-    initialLeft = note.offsetLeft;
-    initialTop = note.offsetTop;
-    note.style.transition = 'none';
-  };
+  // DRAG FUNCTIONALITY (WORKS ON ALL PAGES)
+  document.querySelectorAll('.sticky-note').forEach(note => {
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
 
-  const drag = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-    const deltaX = clientX - startX;
-    const deltaY = clientY - startY;
-    note.style.left = (initialLeft + deltaX) + 'px';
-    note.style.top = (initialTop + deltaY) + 'px';
-  };
+    const startDrag = (e) => {
+      isDragging = true;
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+      startX = clientX;
+      startY = clientY;
+      initialLeft = note.offsetLeft;
+      initialTop = note.offsetTop;
+      note.style.transition = 'none';
+    };
 
-  const stopDrag = () => {
-    if (isDragging) {
-      isDragging = false;
-      note.style.transition = '';
-    }
-  };
+    const drag = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+      const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
+      note.style.left = (initialLeft + deltaX) + 'px';
+      note.style.top = (initialTop + deltaY) + 'px';
+    };
 
-  // Mouse
-  note.addEventListener('mousedown', startDrag);
-  document.addEventListener('mousemove', drag);
-  document.addEventListener('mouseup', stopDrag);
+    const stopDrag = () => {
+      if (isDragging) {
+        isDragging = false;
+        note.style.transition = '';
+      }
+    };
 
-  // Touch
-  note.addEventListener('touchstart', startDrag);
-  document.addEventListener('touchmove', drag);
-  document.addEventListener('touchend', stopDrag);
-});
-</script>
+    // Mouse
+    note.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDrag);
+
+    // Touch
+    note.addEventListener('touchstart', startDrag);
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('touchend', stopDrag);
+  });
 </script>
 </body>
 </html>
