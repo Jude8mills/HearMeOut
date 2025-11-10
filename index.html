@@ -229,17 +229,17 @@ button:hover { transform:scale(1.05); }
     <img src="postit-photo4.png" alt="Photo 4">
   </div>
 </div>
-<!-- PAGE 3 -->
+<!-- PAGE 3 — MUST CLICK ALL 3 TO UNLOCK NEXT -->
 <div id="page3" class="page hidden" style="background: #fff8f8; overflow: visible;">
   <h1>Quick Quiz!</h1>
   <p>What's my favorite thing about you?</p>
-<div class="quiz">
-  <button onclick="wrong('Your coding skills')">Your eyes</button>
-  <button onclick="wrong('Your memes')">Your smile</button>
-  <button onclick="correct()">Everything</button>
-</div>
-  <p id="quizResult" style="margin-top:1rem; min-height:1.5rem;"></p>
-  <button id="quizNext" style="display:none;" onclick="nextPage(2)">Next</button>
+  <div class="quiz">
+    <button id="btn1" onclick="showAnswer('Your coding skills', 'btn1')">Your Eyes</button>
+    <button id="btn2" onclick="showAnswer('Your memes', 'btn2')">Your Smile</button>
+    <button id="btn3" onclick="showAnswer('Everything', 'btn3')">Everything</button>
+  </div>
+  <p id="quizResult" style="margin-top:1rem; min-height:1.5rem; font-weight: bold; color: #ff6b9d;"></p>
+  <button id="quizNext" style="display:none; margin-top: 1.5rem;" onclick="nextPage(2)">Next</button>
 </div>
 <!-- [PAGES 4–6 UNCHANGED] -->
 <div id="page4" class="page hidden">
@@ -269,22 +269,36 @@ button:hover { transform:scale(1.05); }
     next.classList.remove('hidden');
     setTimeout(() => next.classList.add('visible'), 50);
   }
+let clickedButtons = new Set();
 
-  function correct() {
-    document.getElementById('quizResult').innerHTML = 'I am in love with you, the whole concept of you, your whole make-up, bological to atomic, even to the most minute detail..';
-    document.getElementById('quizNext').style.display = 'block';
-    setTimeout(() => nextPage(2), 2000);
+function showAnswer(answer, buttonId) {
+  const result = document.getElementById('quizResult');
+  const btn = document.getElementById(buttonId);
+  const nextBtn = document.getElementById('quizNext');
+
+  // Prevent double-click
+  if (btn.disabled) return;
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+
+  // Show message
+  if (answer === "Your coding skills") {
+    result.textContent = "I could look into them forever ";
+  } else if (answer === "Your memes") {
+    result.textContent = "Immediately makes the world a better place for me ";
+  } else if (answer === "Everything") {
+    result.innerHTML = "I am in love with you, the whole concept of you, your whole make-up, biological to atomic, even to the most minute detail.";
   }
 
-function wrong(buttonText) {
-  const result = document.getElementById('quizResult');
-  if (buttonText === "Your eyes") {
-    result.textContent = "I could look into them forever ";
-  } else if (buttonText === "Your Smile") {
-    result.textContent = "Immediately makes the world a better place for me ";
+  // Track clicked
+  clickedButtons.add(buttonId);
+
+  // If all 3 clicked → show Next
+  if (clickedButtons.size === 3) {
+    nextBtn.style.display = 'block';
   }
 }
-
+  
   function sayYes() {
     nextPage(3);
     setTimeout(createConfetti, 600);
