@@ -54,7 +54,7 @@
     .confetti { position:absolute; width:10px; height:10px; background:#ff6b9d; animation:fall 3s linear infinite; }
     @keyframes fall { to { transform:translateY(100vh) rotate(360deg); opacity:0; } }
 
-/* STICKY NOTES */
+/* PREVENT OVERLAP — CAT & TEXT ON TOP */
 .sticky-note {
   position: absolute;
   width: 140px;
@@ -93,6 +93,12 @@
   height: 100%;
   object-fit: cover;
   border-radius: 6px;
+}
+
+/* SPREAD OUT — NO OVERLAP */
+#page2 img, #page2 h1, #page2 p, #page2 button {
+  position: relative;
+  z-index: 10;
 }
   </style>
 </head>
@@ -168,58 +174,59 @@
     <button onclick="nextPage(0)">uh-huh...</button>
   </div>
 </div>
-
-<!-- PAGE 2 — 10 POST-ITS: 6 TEXT + 1 DRAWING + 3 PHOTOS -->
+<!-- PAGE 2 — 10 POST-ITS: NO OVERLAP, SPREAD OUT -->
 <div id="page2" class="page hidden" style="
   background: #fff8f8;
   overflow: visible;
+  position: relative;
 ">
-  <!-- CAT -->
+  <!-- CAT GIF -->
   <img src="FirstGIF.gif" alt="Cute cat" style="
     width: 150px; height: 150px; border-radius: 50%;
-    box-shadow: 0 8px 20px rgba(255,107,157,0.3); z-index: 2;
+    box-shadow: 0 8px 20px rgba(255,107,157,0.3); z-index: 10;
+    position: relative;
   ">
 
-  <h1 style="margin: 1.5rem 0; color: #ff6b9d;">Cathy</h1>
+  <h1 style="margin: 1.5rem 0; color: #ff6b9d; z-index: 10; position: relative;">Cathy</h1>
 
-  <!-- TEXT POST-ITS -->
-  <div class="sticky-note" style="top: 8%; left: 6%; transform: rotate(-15deg); --r: -15deg;">
+  <!-- TEXT POST-ITS (FAR FROM CENTER) -->
+  <div class="sticky-note" style="top: 5%; left: 2%; transform: rotate(-18deg); --r: -18deg; width: 160px; height: 160px;">
     I was hoping to see you in December so that i'd ask in-person, but yk, shit happened, so i have to make due.
   </div>
-  <div class="sticky-note" style="top: 12%; right: 4%; transform: rotate(10deg); --r: 10deg;">
+  <div class="sticky-note" style="top: 8%; right: 1%; transform: rotate(15deg); --r: 15deg; width: 160px; height: 160px;">
     i love staying up late just so that i can be able talk to you more.
   </div>
-  <div class="sticky-note" style="bottom: 32%; left: 3%; transform: rotate(-18deg); --r: -18deg;">
+  <div class="sticky-note" style="bottom: 35%; left: 1%; transform: rotate(-20deg); --r: -20deg; width: 160px; height: 160px;">
     You and me together makes so much sense.
   </div>
-  <div class="sticky-note" style="bottom: 26%; right: 8%; transform: rotate(12deg); --r: 12deg;">
+  <div class="sticky-note" style="bottom: 30%; right: 2%; transform: rotate(18deg); --r: 18deg; width: 160px; height: 160px;">
     I want you to know that i am serious about you and i am ready to take the next step with us.
   </div>
-  <div class="sticky-note" style="top: 38%; left: 1%; transform: rotate(-7deg); --r: -7deg;">
+  <div class="sticky-note" style="top: 35%; left: 0%; transform: rotate(-10deg); --r: -10deg; width: 150px; height: 150px;">
     i coded this entire site in HTML and i don't even code.
   </div>
-  <div class="sticky-note" style="top: 44%; right: 2%; transform: rotate(14deg); --r: 14deg;">
-   11/11?
+  <div class="sticky-note" style="top: 40%; right: 0%; transform: rotate(16deg); --r: 16deg; width: 150px; height: 150px;">
+    When you smile at me like that
   </div>
 
-  <!-- YOUR DRAWING -->
-  <div class="sticky-note image-note" style="top: 25%; left: 2%; transform: rotate(-9deg); --r: -9deg;">
+  <!-- YOUR DRAWING (TOP-LEFT) -->
+  <div class="sticky-note image-note" style="top: 20%; left: 5%; transform: rotate(-12deg); --r: -12deg;">
     <img src="postit-drawing.png" alt="Your drawing" style="width:100%; height:100%; object-fit:contain; border-radius:6px;">
   </div>
 
-  <!-- PHOTO 1 -->
-  <div class="sticky-note image-note" style="top: 28%; right: 3%; transform: rotate(8deg); --r: 8deg;">
+  <!-- PHOTO 1 (TOP-RIGHT) -->
+  <div class="sticky-note image-note" style="top: 22%; right: 6%; transform: rotate(10deg); --r: 10deg;">
     <img src="postit-photo1.png" alt="Photo 1" style="width:100%; height:100%; object-fit:cover; border-radius:6px;">
   </div>
 
-  <!-- PHOTO 2 -->
-  <div class="sticky-note image-note" style="bottom: 22%; left: 5%; transform: rotate(-11deg); --r: -11deg;">
+  <!-- PHOTO 2 (BOTTOM-LEFT) -->
+  <div class="sticky-note image-note" style="bottom: 18%; left: 3%; transform: rotate(-14deg); --r: -14deg;">
     <img src="postit-photo2.png" alt="Photo 2" style="width:100%; height:100%; object-fit:cover; border-radius:6px;">
   </div>
 
-  <!-- PHOTO 3 -->
-  <div class="sticky-note image-note" style="top: 48%; left: 4%; transform: rotate(6deg); --r: 6deg;">
-    <img src="postit-photo4.png" alt="Photo 3" style="width:100%; height:100%; object-fit:cover; border-radius:6px;">
+  <!-- PHOTO 3 (BOTTOM-RIGHT) -->
+  <div class="sticky-note image-note" style="bottom: 20%; right: 4%; transform: rotate(12deg); --r: 12deg;">
+    <img src="postit-photo3.png" alt="Photo 3" style="width:100%; height:100%; object-fit:cover; border-radius:6px;">
   </div>
 
   <!-- MAIN MESSAGE -->
@@ -227,12 +234,14 @@
     margin: 1.5rem 0; max-width: 600px;
     background: rgba(255,255,255,0.9); padding: 1rem;
     border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 10; position: relative;
   ">
     You are the best thing to ever happen to me.
   </p>
 
-  <button onclick="nextPage(1)">Keep going</button>
+  <button onclick="nextPage(1)" style="z-index: 10; position: relative;">Keep going</button>
 </div>
+
 
 <!-- PAGE 3 -->
 <div id="page3" class="page hidden" style="background: #fff8f8; overflow: visible;">
