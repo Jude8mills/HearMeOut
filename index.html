@@ -5,6 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I'm asking</title>
  <style>
+   <!-- 3D LOVE + CATHY IN STARS + CONFETTI -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // Auto-play love song (silent until user interacts)
+  const loveSong = new Audio('https://cdn.freesound.org/previews/620/620469_5674468-lq.mp3');
+  loveSong.loop = true;
+  document.addEventListener('click', () => loveSong.play().catch(() => {}), { once: true });
+
+  // 3D Floating "I LOVE YOU"
+  function add3DText() {
+    const container = document.getElementById('page5');
+    if (!container) return;
+    const text = document.createElement('div');
+    text.innerHTML = 'I LOVE YOU';
+    text.style.cssText = `
+      position: absolute;
+      top: 20%; left: 50%;
+      transform: translateX(-50%) perspective(1000px) rotateX(15deg);
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: #ff6b9d;
+      text-shadow: 0 10px 20px rgba(255,107,157,.5);
+      animation: float3D 4s ease-in-out infinite;
+      z-index: 1000;
+      pointer-events: none;
+    `;
+    container.appendChild(text);
+
+    // CATHY in stars
+    const stars = document.createElement('div');
+    stars.innerHTML = 'C A T H Y'.split('').map((l, i) => 
+      `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 8px; font-size:2.5rem; color:#ffd700;">${l}</span>`
+    ).join('');
+    stars.style.cssText = 'position:absolute; bottom:20%; left:50%; transform:translateX(-50%); font-family:Pacifico,cursive;';
+    container.appendChild(stars);
+  }
+
+  // Trigger on YES page
+  const originalSayYes = sayYes;
+  sayYes = function() {
+    originalSayYes();
+    setTimeout(add3DText, 800);
+    setTimeout(() => confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } }), 1000);
+  };
+
+  // CSS for 3D & stars
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes float3D {
+      0%,100% { transform: translateX(-50%) translateY(0) rotateX(15deg); }
+      50% { transform: translateX(-50%) translateY(-20px) rotateX(20deg); }
+    }
+    @keyframes starTwinkle {
+      0%,100% { opacity:0.5; transform:scale(1); }
+      50% { opacity:1; transform:scale(1.3); }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&family=Indie+Flower&display=swap');
 @keyframes float {
   0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
