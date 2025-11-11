@@ -5,65 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I'm asking</title>
  <style>
-   <!-- 3D LOVE + CATHY IN STARS + CONFETTI -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-  // Auto-play love song (silent until user interacts)
-  const loveSong = new Audio('https://cdn.freesound.org/previews/620/620469_5674468-lq.mp3');
-  loveSong.loop = true;
-  document.addEventListener('click', () => loveSong.play().catch(() => {}), { once: true });
-
-  // 3D Floating "I LOVE YOU"
-  function add3DText() {
-    const container = document.getElementById('page5');
-    if (!container) return;
-    const text = document.createElement('div');
-    text.innerHTML = 'I LOVE YOU';
-    text.style.cssText = `
-      position: absolute;
-      top: 20%; left: 50%;
-      transform: translateX(-50%) perspective(1000px) rotateX(15deg);
-      font-family: 'Pacifico', cursive;
-      font-size: 3rem;
-      color: #ff6b9d;
-      text-shadow: 0 10px 20px rgba(255,107,157,.5);
-      animation: float3D 4s ease-in-out infinite;
-      z-index: 1000;
-      pointer-events: none;
-    `;
-    container.appendChild(text);
-
-    // CATHY in stars
-    const stars = document.createElement('div');
-    stars.innerHTML = 'C A T H Y'.split('').map((l, i) => 
-      `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 8px; font-size:2.5rem; color:#ffd700;">${l}</span>`
-    ).join('');
-    stars.style.cssText = 'position:absolute; bottom:20%; left:50%; transform:translateX(-50%); font-family:Pacifico,cursive;';
-    container.appendChild(stars);
-  }
-
-  // Trigger on YES page
-  const originalSayYes = sayYes;
-  sayYes = function() {
-    originalSayYes();
-    setTimeout(add3DText, 800);
-    setTimeout(() => confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } }), 1000);
-  };
-
-  // CSS for 3D & stars
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes float3D {
-      0%,100% { transform: translateX(-50%) translateY(0) rotateX(15deg); }
-      50% { transform: translateX(-50%) translateY(-20px) rotateX(20deg); }
-    }
-    @keyframes starTwinkle {
-      0%,100% { opacity:0.5; transform:scale(1); }
-      50% { opacity:1; transform:scale(1.3); }
-    }
-  `;
-  document.head.appendChild(style);
-</script>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&family=Indie+Flower&display=swap');
 @keyframes float {
   0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
@@ -164,6 +105,7 @@ button:hover { transform:scale(1.05); }
   50% { transform: scale(1.08); }
 }
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 <!-- PAGE 1 — BUTTON FIXED: REMOVED width:100vw -->
@@ -180,25 +122,25 @@ button:hover { transform:scale(1.05); }
   overflow: visible;
 ">
   <div style="
-    position: absolute;
-    top: 15%;
-    left: 22%;
-    width: 200px;
-    padding: 14px 18px;
-    background: white;
-    border-radius: 35px;
-    box-shadow: 0 4px 12px rgba(255,107,157,0.25);
-    font-family: 'Pacifico', cursive;
-    font-size: 1.4rem;
-    color: #ff69b4;
-    -webkit-text-stroke: 0.6px white;
-    text-stroke: 0.6px white;
-    text-align: center;
-    z-index: 2;
-    animation: float 6s ease-in-out infinite;
-  ">
-    Hi Sweetie!
-  </div>
+  position: absolute;
+  top: 15%;
+  left: 22%;
+  width: 200px;
+  padding: 14px 18px;
+  background: white;
+  border-radius: 35px;
+  box-shadow: 0 4px 12px rgba(255,107,157,0.25);
+  font-family: 'Pacifico', cursive;
+  font-size: 1.4rem;
+  color: #ff69b4;
+  -webkit-text-stroke: 0.6px white;
+  text-stroke: 0.6px white;
+  text-align: center;
+  z-index: 2;
+  animation: float 6s ease-in-out infinite;
+">
+  Hi Sweetie!
+</div>
   <div style="position: relative; width: 100%; max-width: 600px; margin-top: max(8rem, 15vh);">
     <div style="
       position: absolute;
@@ -428,23 +370,23 @@ button:hover { transform:scale(1.05); }
     setTimeout(() => letterPage.classList.add('visible'), 50);
   }
 
-  // === YES! → YAY!!! + 3D LOVE + CONFETTI ===
+  // === YES! → YAY!!! + CONFETTI + CATHY IN STARS ===
   function sayYes() {
-    nextPage(4); // Final Question (index 4) → YES page (index 5)
+    nextPage(4); // Final Question → YES page
     setTimeout(() => {
       createConfetti();
-      add3DText();
+      addCathyStars(); // Only "C A T H Y" in stars
     }, 600);
   }
 
-  // === NO WAY → TRY AGAIN (CLEAN, NO OVERLAP) ===
+  // === NO WAY → TRY AGAIN (CLEAN) ===
   function sayNo() {
-    nextPage(5); // Final Question (index 4) → No page (index 6)
+    nextPage(5); // Final Question → No page
   }
 
-  // === BACK TO FINAL QUESTION FROM "NO" PAGE ===
+  // === BACK TO FINAL QUESTION ===
   function backToQuestion() {
-    nextPage(5); // No page (index 6) → Final Question (index 4)
+    nextPage(5); // No page → Final Question
   }
 
   // === CONFETTI ===
@@ -460,27 +402,25 @@ button:hover { transform:scale(1.05); }
     }
   }
 
-  // === 3D "I LOVE YOU" + "CATHY" IN STARS (ONLY ON YES PAGE) ===
-  function add3DText() {
+  // === CATHY IN GOLDEN STARS (ONLY) ===
+  function addCathyStars() {
     const container = document.getElementById('page5');
     if (!container) return;
 
-    const loveText = document.createElement('div');
-    loveText.innerHTML = 'I LOVE YOU';
-    loveText.style.cssText = `
-      position: absolute; top: 20%; left: 50%; transform: translateX(-50%) perspective(1000px) rotateX(15deg);
-      font-family: 'Pacifico', cursive; font-size: 3rem; color: #ff6b9d;
-      text-shadow: 0 10px 20px rgba(255,107,157,.5); animation: float3D 4s ease-in-out infinite;
-      z-index: 1000; pointer-events: none;
-    `;
-    container.appendChild(loveText);
-
-    const cathyStars = document.createElement('div');
-    cathyStars.innerHTML = 'C A T H Y'.split('').map((l, i) =>
-      `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 8px; font-size:2.5rem; color:#ffd700;">${l}</span>`
+    const stars = document.createElement('div');
+    stars.innerHTML = 'C A T H Y'.split('').map((l, i) =>
+      `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 10px; font-size:3rem; color:#ffd700; text-shadow:0 0 10px gold;">${l}</span>`
     ).join('');
-    cathyStars.style.cssText = 'position:absolute; bottom:20%; left:50%; transform:translateX(-50%); font-family:Pacifico,cursive;';
-    container.appendChild(cathyStars);
+    stars.style.cssText = `
+      position: absolute;
+      bottom: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Pacifico', cursive;
+      font-weight: bold;
+      z-index: 1000;
+    `;
+    container.appendChild(stars);
   }
 
   // === DRAG STICKY NOTES ===
@@ -523,16 +463,12 @@ button:hover { transform:scale(1.05); }
     document.addEventListener('touchend', stopDrag);
   });
 
-  // === CSS ANIMATIONS FOR 3D TEXT ===
+  // === STAR TWINKLE ANIMATION (ONLY) ===
   const style = document.createElement('style');
   style.textContent = `
-    @keyframes float3D {
-      0%,100% { transform: translateX(-50%) translateY(0) rotateX(15deg); }
-      50% { transform: translateX(-50%) translateY(-20px) rotateX(20deg); }
-    }
     @keyframes starTwinkle {
-      0%,100% { opacity:0.5; transform:scale(1); }
-      50% { opacity:1; transform:scale(1.3); }
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.4); }
     }
   `;
   document.head.appendChild(style);
