@@ -327,22 +327,32 @@ button:hover { transform:scale(1.05); }
   ">Okay...</button>
 </div>
 <!-- [PAGES 4–6 UNCHANGED] -->
-<div id="page4" class="page hidden">
-  <div class="heart" style="font-size: 3.5rem; margin: 1rem 0;">♥</div>
-  <h1 style="font-family: 'Pacifico', cursive; font-size: 2.8rem; color: #ff69b4; margin: 0.5rem 0;">
-    Cathy,
-  </h1>
+<div id="page4" class="page hidden" style="padding: 1rem;">
+  <div class="heart" style="
+    font-size: 3rem;
+    margin: 0.5rem 0;
+    animation: pulse 1.5s infinite;
+  ">♥</div>
+
+  <h1 style="
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #ff69b4;
+    margin: 0.2rem 0;
+    line-height: 1;
+  ">Cathy,</h1>
+
   <p style="
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.4rem;
-    line-height: 2.1;
+    font-size: 1.35rem;
+    line-height: 1.8;
     color: #444;
-    max-width: 700px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.2);
+    max-width: 600px;
+    margin: 0.8rem auto 1.2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(255, 107, 157, 0.25);
     text-align: center;
   ">
     to comfortable silences,<br>
@@ -350,16 +360,32 @@ button:hover { transform:scale(1.05); }
     and kisses with cold lips!<br><br>
     <strong>May I be your Boyfriend?</strong>
   </p>
-  <div style="margin-top: 2rem;">
+
+  <div style="margin: 0.5rem 0; display: flex; justify-content: center; gap: 1rem;">
     <button id="finalYes" style="
-      background: #a0e7a0; color: white; padding: 1rem 2.5rem;
-      font-size: 1.3rem; border-radius: 50px; margin: 0 1rem;
-      box-shadow: 0 4px 15px rgba(160, 231, 160, 0.4);
+      background: #a0e7a0;
+      color: white;
+      padding: 0.9rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(160, 231, 160, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s;
     ">YES!</button>
+
     <button id="finalNo" style="
-      background: #ff9999; color: white; padding: 1rem 2.5rem;
-      font-size: 1.3rem; border-radius: 50px; margin: 0 1rem;
-      box-shadow: 0 4px 15px rgba(255, 153, 153, 0.4);
+      background: #ff9999;
+      color: white;
+      padding: 0.9rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(255, 153, 153, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s;
     ">no way</button>
   </div>
 </div>
