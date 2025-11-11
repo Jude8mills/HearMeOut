@@ -380,70 +380,72 @@ button:hover { transform:scale(1.05); }
   <button onclick="backToQuestion()">Go back</button>
 </div>
 <script>
-   const pages = document.querySelectorAll('.page');
-  
-   function nextPage(n) {
+  const pages = document.querySelectorAll('.page');
+
+  function nextPage(n) {
     pages[n].classList.remove('visible');
     pages[n].classList.add('hidden');
     const next = pages[n+1];
     next.classList.remove('hidden');
     setTimeout(() => next.classList.add('visible'), 50);
-  } 
-let clickedButtons = new Set();
-
-function showAnswer(answer, buttonId) {
-  const result = document.getElementById('quizResult');
-  const btn = document.getElementById(buttonId);
-  const nextBtn = document.getElementById('quizNext');
-
-  // Prevent double-click
-  if (btn.disabled) return;
-  btn.disabled = true;
-  btn.style.opacity = '0.6';
-
-  // Show message
-  if (answer === "Your Eyes") {
-    result.textContent = "I could look into them forever ";
-  } else if (answer === "Your Smile") {
-    result.textContent = "Immediately makes the world a better place for me ";
-  } else if (answer === "Everything") {
-    result.innerHTML = "I am in love with you, the whole concept of you, your whole make-up, biological to atomic, even to the most minute detail.";
   }
 
-  // Track clicked
-  clickedButtons.add(buttonId);
+  let clickedButtons = new Set();
 
-  if (clickedButtons.size === 3) {
+  function showAnswer(answer, buttonId) {
+    const result = document.getElementById('quizResult');
+    const btn = document.getElementById(buttonId);
+    const nextBtn = document.getElementById('quizNext');
+
+    if (btn.disabled) return;
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+
+    if (answer === "Your Eyes") {
+      result.textContent = "I could look into them forever ";
+    } else if (answer === "Your Smile") {
+      result.textContent = "Immediately makes the world a better place for me ";
+    } else if (answer === "Everything") {
+      result.innerHTML = "I am in love with you, the whole concept of you, your whole make-up, biological to atomic, even to the most minute detail.";
+    }
+
+    clickedButtons.add(buttonId);
+
+    if (clickedButtons.size === 3) {
       nextBtn.style.display = 'block';
       nextBtn.onclick = goToLetter;
     }
   }
-  // If all 3 clicked → show Next
-function goToLetter() {
-  const pages = document.querySelectorAll('.page');
-  pages[2].classList.remove('visible'); // Hide quiz
-  pages[2].classList.add('hidden');
-  const letterPage = document.getElementById('pageLetter');
-  letterPage.classList.remove('hidden');
-  setTimeout(() => letterPage.classList.add('visible'), 50);
-}
-function sayYes() {
-  nextPage(4);
-  setTimeout(createConfetti, 600);
-}
+
+  function goToLetter() {
+    pages[2].classList.remove('visible');
+    pages[2].classList.add('hidden');
+    const letterPage = document.getElementById('pageLetter');
+    letterPage.classList.remove('hidden');
+    setTimeout(() => letterPage.classList.add('visible'), 50);
+  }
+
+  function sayYes() {
+    nextPage(4); // Final Question → YES page
+    setTimeout(() => {
+      createConfetti();
+      add3DText();
+    }, 600);
+  }
+
   function sayNo() {
-  nextPage(4);
-  setTimeout(() => {
-    pages[5].classList.remove('hidden');  // No page is now index 6
-    setTimeout(() => pages[5].classList.add('visible'), 50);
-  }, 50);
-}
+    nextPage(5); // Final Question → No page
+    setTimeout(() => {
+      pages[6].classList.remove('hidden');
+      setTimeout(() => pages[6].classList.add('visible'), 50);
+    }, 50);
+  }
 
   function backToQuestion() {
-    pages[5].classList.remove('visible');
-    pages[5].classList.add('hidden');
-    pages[3].classList.remove('hidden');
-    setTimeout(() => pages[3].classList.add('visible'), 50);
+    pages[6].classList.remove('visible');
+    pages[6].classList.add('hidden');
+    pages[4].classList.remove('hidden');
+    setTimeout(() => pages[4].classList.add('visible'), 50);
   }
 
   function createConfetti() {
@@ -458,22 +460,41 @@ function sayYes() {
     }
   }
 
-  // DRAG FUNCTIONALITY (WORKS ON ALL PAGES)
+  // 3D LOVE + CATHY IN STARS
+  function add3DText() {
+    const container = document.getElementById('page5');
+    if (!container) return;
+
+    const text = document.createElement('div');
+    text.innerHTML = 'I LOVE YOU';
+    text.style.cssText = `
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%) perspective(1000px) rotateX(15deg);
+      font-family: 'Pacifico', cursive; font-size: 3rem; color: #ff6b9d;
+      text-shadow: 0 10px 20px rgba(255,107,157,.5); animation: float3D 4s ease-in-out infinite;
+      z-index: 1000; pointer-events: none;
+    `;
+    container.appendChild(text);
+
+    const stars = document.createElement('div');
+    stars.innerHTML = 'C A T H Y'.split('').map((l, i) => 
+      `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 8px; font-size:2.5rem; color:#ffd700;">${l}</span>`
+    ).join('');
+    stars.style.cssText = 'position:absolute; bottom:20%; left:50%; transform:translateX(-50%); font-family:Pacifico,cursive;';
+    container.appendChild(stars);
+  }
+
+  // DRAG FUNCTIONALITY
   document.querySelectorAll('.sticky-note').forEach(note => {
     let isDragging = false;
     let startX, startY, initialLeft, initialTop;
-
     const startDrag = (e) => {
       isDragging = true;
       const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
       const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-      startX = clientX;
-      startY = clientY;
-      initialLeft = note.offsetLeft;
-      initialTop = note.offsetTop;
+      startX = clientX; startY = clientY;
+      initialLeft = note.offsetLeft; initialTop = note.offsetTop;
       note.style.transition = 'none';
     };
-
     const drag = (e) => {
       if (!isDragging) return;
       e.preventDefault();
@@ -484,20 +505,15 @@ function sayYes() {
       note.style.left = (initialLeft + deltaX) + 'px';
       note.style.top = (initialTop + deltaY) + 'px';
     };
-
     const stopDrag = () => {
       if (isDragging) {
         isDragging = false;
         note.style.transition = '';
       }
     };
-
-    // Mouse
     note.addEventListener('mousedown', startDrag);
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', stopDrag);
-
-    // Touch
     note.addEventListener('touchstart', startDrag);
     document.addEventListener('touchmove', drag);
     document.addEventListener('touchend', stopDrag);
