@@ -289,7 +289,7 @@ button:hover { transform:scale(1.05); }
     </div>
   </div>
 
-  <button onclick="nextPage(4)" style="
+  <button onclick="nextPage(3)" style="
     margin: 2rem auto 6rem;
     padding: 1.2rem 3rem;
     background: #ff6b9d;
@@ -369,14 +369,14 @@ function goToLetter() {
   setTimeout(() => letterPage.classList.add('visible'), 50);
 }
 function sayYes() {
-  nextPage(5);
+  nextPage(4);
   setTimeout(createConfetti, 600);
 }
   function sayNo() {
-  nextPage(5);
+  nextPage(4);
   setTimeout(() => {
-    pages[6].classList.remove('hidden');  // No page is now index 6
-    setTimeout(() => pages[6].classList.add('visible'), 50);
+    pages[5].classList.remove('hidden');  // No page is now index 6
+    setTimeout(() => pages[5].classList.add('visible'), 50);
   }, 50);
 }
 
