@@ -245,7 +245,7 @@ button:hover { transform:scale(1.05); }
   <p id="quizResult" style="margin-top:1rem; min-height:1.5rem; font-weight: bold; color: #ff6b9d;"></p>
  <button id="quizNext" style="display:none; margin-top: 1.5rem;">Next</button>
 </div>
- <!-- PAGE 3.5 — LETTER WITH SCROLL -->
+<!-- PAGE 3.5 — LETTER WITH SCROLL (FIXED) -->
 <div id="pageLetter" class="page hidden" style="
   background: #fdfaf7;
   overflow-y: auto;
@@ -253,7 +253,10 @@ button:hover { transform:scale(1.05); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: flex-start;
+  min-height: 100vh;
+  position: absolute;
+  inset: 0;
 ">
   <div style="
     width: 100%;
@@ -268,8 +271,8 @@ button:hover { transform:scale(1.05); }
     line-height: 2.2;
     color: #5d4037;
     text-align: left;
-    min-height: 120vh;
-    margin-bottom: 3rem;
+    min-height: 140vh;
+    margin: 2rem 0 6rem;
   ">
     Cathy,<br><br>
 
@@ -286,9 +289,8 @@ button:hover { transform:scale(1.05); }
     </div>
   </div>
 
-  <!-- BUTTON AT BOTTOM — ALWAYS VISIBLE AFTER SCROLL -->
   <button onclick="nextPage(4)" style="
-    margin: 2rem auto 4rem;
+    margin: 2rem auto 6rem;
     padding: 1.2rem 3rem;
     background: #ff6b9d;
     color: white;
@@ -299,7 +301,6 @@ button:hover { transform:scale(1.05); }
     box-shadow: 0 6px 20px rgba(255,107,157,.4);
     animation: pulse 2s infinite;
   ">I’m ready...</button>
-</div>
 </div>
 <!-- [PAGES 4–6 UNCHANGED] -->
 <div id="page4" class="page hidden">
@@ -320,8 +321,15 @@ button:hover { transform:scale(1.05); }
   <button onclick="backToQuestion()">Go back</button>
 </div>
 <script>
- const pages = document.querySelectorAll('.page');
-
+   const pages = document.querySelectorAll('.page');
+  
+   function nextPage(n) {
+    pages[n].classList.remove('visible');
+    pages[n].classList.add('hidden');
+    const next = pages[n+1];
+    next.classList.remove('hidden');
+    setTimeout(() => next.classList.add('visible'), 50);
+  } 
 let clickedButtons = new Set();
 
 function showAnswer(answer, buttonId) {
@@ -360,13 +368,6 @@ function goToLetter() {
   letterPage.classList.remove('hidden');
   setTimeout(() => letterPage.classList.add('visible'), 50);
 }
- function nextPage(n) {
-    pages[n].classList.remove('visible');
-    pages[n].classList.add('hidden');
-    const next = pages[n+1];
-    next.classList.remove('hidden');
-    setTimeout(() => next.classList.add('visible'), 50);
-  } 
 function sayYes() {
   nextPage(5);
   setTimeout(createConfetti, 600);
