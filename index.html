@@ -178,7 +178,7 @@ button:hover { transform:scale(1.05); }
   font-size: 1.2rem;
   color: #444;
 ">
-  I made this site for you, because it felt like the most Jude way to go about it.
+  I made this site for you, because it felt like the most <i>Jude</i> way to go about it.
 </p>
     <button id="next1">uh-huh...</button>
   </div>
@@ -295,9 +295,6 @@ button:hover { transform:scale(1.05); }
     I know that I want you. I know that I want to invest my attention and love into this. And I know that I want my “the one” to be you.<br><br>
     What I am about to ask isn’t just a question. It’s a promise. A promise to choose you. Every day. Every version. Every mood.<br><br>
     So here’s my heart, wide open, asking...<br><br>
-    <div style="text-align: right; font-style: normal; font-weight: bold; color: #5d4037; font-size: 1.4rem;">
-      — Jude
-    </div>
   </div>
 
   <button id="letterNext" style="
@@ -317,13 +314,17 @@ button:hover { transform:scale(1.05); }
 <div id="page4" class="page hidden">
   <div class="heart">&#9829;</div>
   <h1>Cathy,</h1>
-  <p> to comfortable silences, insulting people together forever,  and kisses with cold lips!, May i be your Boyfriend?</p>
+ <p style="font-family: 'Times New Roman', Times, serif;">
+  to comfortable silences, insulting people together forever, and kisses with cold lips! May I be your Boyfriend?
+</p>
   <button id="finalYes">YES!</button>
   <button id="finalNo">no way</button>
 </div>
 <div id="page5" class="page hidden">
   <h1>YAY!!!</h1>
-  <p>I promise to be here for you, to be your person, to be crazy about you and to build the life we have envisioned for ourselves. You can text me “Hey Boyfriend” when you see this hihi.</p>
+ <p style="font-family: 'Times New Roman', Times, serif;">
+  I promise to be here for you, to be your person, to be crazy about you and to build the life we have envisioned for ourselves. You can text me “Hey Boyfriend” when you see this hihi.
+</p>
   <div id="confettiContainer"></div>
 </div>
 <div id="page6" class="page hidden">
@@ -426,9 +427,9 @@ function sayNo() { goToPage('page4', 'page6'); }
     if (!container) return;
 
     const stars = document.createElement('div');
-    stars.innerHTML = 'C A T H Y'.split('').map((l, i) =>
-      `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 10px; font-size:3rem; color:#ffd700; text-shadow:0 0 10px gold;">${l}</span>`
-    ).join('');
+    stars.innerHTML = 'CATHY'.split('').map((l, i) =>
+    `<span style="display:inline-block; animation: starTwinkle ${2+i*0.3}s infinite; margin:0 6px; font-size:3.2rem; font-family:'Pacifico', cursive; font-weight:400; color:#fffacd; text-shadow:0 0 10px #ffd700, 0 0 20px #ffec8b;">${l}</span>`
+  ).join('');
     stars.style.cssText = `
       position: absolute;
       bottom: 25%;
