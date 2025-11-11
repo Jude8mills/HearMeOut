@@ -36,7 +36,7 @@ button {
   cursor:pointer; box-shadow:0 4px 15px rgba(255,107,157,.3); transition:.3s;
 }
 button:hover { transform:scale(1.05); }
-.heart { font-size:3rem; animation:pulse 1.5s infinite; margin:1rem 0; }
+.heart { font-size:5rem; animation:pulse 1.5s infinite; margin:1rem 0; }
 @keyframes pulse { 0%,100% {transform:scale(1);} 50% {transform:scale(1.2);} }
 .quiz { margin:2rem 0; }
 .quiz button { margin:0.5rem; background:#c3b1e1; }
@@ -156,7 +156,7 @@ button:hover { transform:scale(1.05); }
     ">
       J &#9825; C
     </div>
-   <p style="
+<p style="
   background: rgba(255,255,255,0.8);
   padding: 1rem;
   border-radius: 15px;
@@ -167,7 +167,7 @@ button:hover { transform:scale(1.05); }
   font-size: 1.2rem;
   color: #444;
 ">
-  I made this site for you, because it felt like the most <em>'Jude'</em> way to go about it.
+  I made this site for you, because it felt like the most Jude way to go about it.
 </p>
     <button onclick="nextPage(0)">uh-huh...</button>
   </div>
@@ -248,7 +248,7 @@ button:hover { transform:scale(1.05); }
   <p id="quizResult" style="margin-top:1rem; min-height:1.5rem; font-weight: bold; color: #ff6b9d;"></p>
  <button id="quizNext" style="display:none; margin-top: 1.5rem;">Next</button>
 </div>
-  <!-- PAGE 3.5 — LETTER WITH SCROLL (FIXED) -->
+ <!-- PAGE LETTER — fixed Jude placement + button -->
 <div id="pageLetter" class="page hidden" style="
   background: #fdfaf7;
   overflow-y: auto;
@@ -262,46 +262,46 @@ button:hover { transform:scale(1.05); }
   inset: 0;
 ">
   <div style="
-  width: 100%;
-  max-width: 700px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%2230%22><rect width=%22100%22 height=%2230%22 fill=%22%23fdfaf7%22/><line x1=%220%22 y1=%2230%22 x2=%22100%22 y2=%2230%22 stroke=%22%23ddd%22 stroke-width=%221%22/></svg>') repeat-y;
-  background-size: 100% 30px;
-  padding: 2rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  font-family: 'Indie Flower', cursive;
-  font-size: 1.25rem;
-  line-height: 2.2;
-  color: #5d4037;
-  text-align: left;
-  min-height: 160vh;
-  margin: 2rem 0 6rem;
-">
-  Cathy,<br><br>
-  I am so happy to be here with you, to perceive and experience you and to fall in love with you. You are a blessing and honestly, I cannot emphasise enough how precious you are to me.<br><br>
-  Listening to my gut and texting you that day in August is probably the best decision I have ever made since I started making decisions in this life. I need you to know that I am serious about you and I am ready to take the next step with us. Dr. Duah said, “if you love somebody, and that person loves you back, then what the hell are you still ‘talking’ for?”<br><br>
-  I was hoping to see you in December so that I’d mention it in person, but yk, shit happened, and now I have to make do.<br><br>
-  I know that I want you. I know that I want to invest my attention and love into this. And I know that I want my “the one” to be you.<br><br>
-  What I am about to ask isn’t just a question. It’s a promise. A promise to choose you. Every day. Every version. Every mood.<br><br>
- 
-  So here’s my heart, wide open, asking...<br><br>
-  
-  <div style="text-align: right; font-style: italic; font-family: 'Indie Flower', cursive; color: #5d4037; font-size: 1.4rem;">
-    — Jude
+    width: 100%;
+    max-width: 700px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%2230%22><rect width=%22100%22 height=%2230%22 fill=%22%23fdfaf7%22/><line x1=%220%22 y1=%2230%22 x2=%22100%22 y2=%2230%22 stroke=%22%23ddd%22 stroke-width=%221%22/></svg>') repeat-y;
+    background-size: 100% 30px;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.25rem;
+    line-height: 2.2;
+    color: #5d4037;
+    text-align: left;
+    min-height: 160vh;
+    margin: 2rem 0 6rem;
+  ">
+    Cathy,<br><br>
+    I am so happy to be here with you, to perceive and experience you and to fall in love with you. You are a blessing and honestly, I cannot emphasise enough how precious you are to me.<br><br>
+    Listening to my gut and texting you that day in August is probably the best decision I have ever made since I started making decisions in this life. I need you to know that I am serious about you and I am ready to take the next step with us. Dr. Duah said, “if you love somebody, and that person loves you back, then what the hell are you still ‘talking’ for?”<br><br>
+    I was hoping to see you in December so that I’d mention it in person, but yk, shit happened, and now I have to make do.<br><br>
+    I know that I want you. I know that I want to invest my attention and love into this. And I know that I want my “the one” to be you.<br><br>
+    What I am about to ask isn’t just a question. It’s a promise. A promise to choose you. Every day. Every version. Every mood.<br><br>
+    So here’s my heart, wide open, asking...<br><br>
+    <div style="text-align: right; font-style: normal; font-weight: bold; color: #5d4037; font-size: 1.4rem;">
+      — Jude
+    </div>
   </div>
+
+  <button id="letterNext" style="
+    margin: 2rem auto 6rem;
+    padding: 1.2rem 3rem;
+    background: #ff6b9d;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255,107,157,.4);
+    animation: pulse 2s infinite;
+  ">Okay...</button>
 </div>
-<button onclick="nextPage(3)" style="
-  margin: 2rem auto 6rem;
-  padding: 1.2rem 3rem;
-  background: #ff6b9d;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,107,157,.4);
-  animation: pulse 2s infinite;
-">Okay...</button>
 <!-- [PAGES 4–6 UNCHANGED] -->
 <div id="page4" class="page hidden">
   <div class="heart">&#9829;</div>
@@ -476,6 +476,15 @@ button:hover { transform:scale(1.05); }
     document.addEventListener('touchmove', drag);
     document.addEventListener('touchend', stopDrag);
   });
+// Fix letter → proposal transition
+document.getElementById('letterNext').addEventListener('click', () => {
+  const letter = document.getElementById('pageLetter');
+  const proposal = document.getElementById('page4');
+  letter.classList.remove('visible');
+  letter.classList.add('hidden');
+  proposal.classList.remove('hidden');
+  setTimeout(() => proposal.classList.add('visible'), 50);
+});
 
   // === STAR TWINKLE ANIMATION (ONLY) ===
   const style = document.createElement('style');
