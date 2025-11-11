@@ -386,9 +386,15 @@ button:hover { transform:scale(1.05); }
   }
 
   // === NO WAY → TRY AGAIN (CLEAN) ===
-  function sayNo() {
-    nextPage(5); // Final Question → No page
-  }
+ function sayNo() {
+  const current = document.getElementById('page4');
+  const next = document.getElementById('page6');
+  current.classList.remove('visible');
+  current.classList.add('hidden');
+  next.classList.remove('hidden');
+  setTimeout(() => next.classList.add('visible'), 50);
+}
+
 
   // === BACK TO FINAL QUESTION ===
   function backToQuestion() {
